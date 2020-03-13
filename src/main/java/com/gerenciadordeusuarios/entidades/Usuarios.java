@@ -2,14 +2,17 @@ package com.gerenciadordeusuarios.entidades;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuarios implements Serializable {
@@ -22,6 +25,9 @@ public class Usuarios implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "nome_cargo", referencedColumnName = "nome")
 	private Cargos cargo;
+	@JsonIgnore
+	@OneToMany(mappedBy = "usuario")
+	private List<Perfis> perfis = new ArrayList<>();
 
 	public Usuarios() {
 
@@ -74,6 +80,10 @@ public class Usuarios implements Serializable {
 
 	public void setCargo(Cargos cargo) {
 		this.cargo = cargo;
+	}
+
+	public List<Perfis> getPerfis() {
+		return perfis;
 	}
 
 	@Override

@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.gerenciadordeusuarios.entidades.Cargos;
+import com.gerenciadordeusuarios.entidades.Perfis;
 import com.gerenciadordeusuarios.entidades.Usuarios;
 import com.gerenciadordeusuarios.repositories.CargosRepository;
+import com.gerenciadordeusuarios.repositories.PerfisRepository;
 import com.gerenciadordeusuarios.repositories.UsuariosRepository;
 
 
@@ -22,6 +24,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private UsuariosRepository usuariosRepository; 
+	
+	@Autowired
+	private PerfisRepository perfisRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -43,8 +48,15 @@ public class TestConfig implements CommandLineRunner {
 		u2.setSexo("F");
 		u2.setCargo(c2);
 		
+		Perfis p1 = new Perfis("vecinho",u1);
+		Perfis p2 = new Perfis("vecinhoSBA",u1);
+		Perfis p3 = new Perfis("Mariazinha",u2);
+		
+		
+		
 		cargosRepository.saveAll(Arrays.asList(c1,c2));
 		usuariosRepository.saveAll(Arrays.asList(u1,u2));
+		perfisRepository.saveAll(Arrays.asList(p1,p2,p3));
 	
 	}
 	
