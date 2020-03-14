@@ -26,4 +26,8 @@ public class CargosService {
 	public Cargos insert( Cargos obj) {
 		return repository.save(obj);
 	}
+	
+	public void delete (String nome) {
+		repository.deleteById(nome);
+	}
 }
